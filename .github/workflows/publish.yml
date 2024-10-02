@@ -1,0 +1,31 @@
+run-name: Publish to NpmJS
+
+on:
+  push:
+    branches: [main]
+
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build & Publish
+    runs-on: ubuntu-latest
+    container: node:20-slim
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Prepare
+        uses: ./.github/actions/prepare
+      
+      - name: Version check
+        run: yarn verify
+      
+      - name: Build
+        run: yarn build
+      
+      - name: Publish
+        run: yarn npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
