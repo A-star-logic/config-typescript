@@ -33,7 +33,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "verify": "node bin/version-check.mjs \"$(npm view @mab-tech/config version)\" ../package.json"
+    "verify": "node ./bin/version-check.js \"$(npm view @mab-tech/config version)\" ../package.json"
   },
   "type": "module"
 }
