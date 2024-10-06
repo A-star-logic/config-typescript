@@ -17,4 +17,5 @@ dist
 
 *.js
 !version-check.js
+!eslint.config.js
 *.d.ts
