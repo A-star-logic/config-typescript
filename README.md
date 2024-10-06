@@ -37,12 +37,9 @@ Example (please replace `@your/package` and `./your/package.json`);
 ### TSConfig
 
 ```json filename="tsconfig.json"
-"extends": "@your-org/tsconfig/esm.json",
-
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": "@ansearch/backend/tsconfig.json"
-  // "extends": "@ansearch/frontend/tsconfig.json"
+  "extends": "@ansearch/linters/tsconfig.json"
 }
 ```
 
@@ -52,9 +49,7 @@ tsup is used for transpiling node packages and apps
 
 ```ts filename="tsup.config.ts"
 import { defineConfig } from "tsup";
-import config from "@ansearch/config/backend/app/tsup.ts";
-// import config from "@ansearch/config/backend/package/tsup.ts";
-// import config from "@ansearch/config/library/backend/tsup.ts";
+import config from "@ansearch/compilers/tsup.ts";
 
 export default defineConfig({
   ...config

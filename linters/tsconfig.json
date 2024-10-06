@@ -1,10 +1,11 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
+    "moduleResolution": "NodeNext",
     "strict": true,
     "target": "ESNext",
     "noEmit": true,
-    "module": "Preserve",
+    "module": "NodeNext",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "isolatedModules": true,
@@ -12,11 +13,13 @@
     "allowJs": false,
     "noImplicitAny": true,
 
-    // already picked up by eslint
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
 
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+
+    "skipLibCheck": true
   },
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts", "**/*.vue"],
+  "exclude": ["node_modules/*", "**/dist/*"]
 }
