@@ -12,6 +12,7 @@ jobs:
     name: Build & Publish
     runs-on: ubuntu-latest
     container: node:20-slim
+    environment: production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
