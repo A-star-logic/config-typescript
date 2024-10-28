@@ -18,4 +18,6 @@ dist
 *.js
 !version-check.js
 !eslint.config.js
+!.prettierrc.js
+!linters/prettier.js
 *.d.ts
