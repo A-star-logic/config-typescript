@@ -35,7 +35,7 @@ You will then need to create the file eslint.config.js on the root with the foll
 
 ```javascript
 // @ts-check
-import astarEslint from '@ansearch/config/linters/eslint.config.js';
+import astarEslint from '@ansearch/linters/eslint.config.js';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(...astarEslint);
@@ -56,6 +56,21 @@ Some rules can be particularly disruptive, here is the list of extensions used, 
 - vue: for vue projects
 
 ### Prettier
+
+create a .prettierrc.js file and add:
+
+```js
+import astarConfig from '@ansearch/linters/prettier.js'
+
+/**
+ * @type {import("prettier").Config}
+ */
+const config = {
+    ...sharedConfig,
+  };
+  
+  export default config;
+```
 
 ### TSConfig
 
