@@ -1,7 +1,6 @@
 {
   "name": "@ansearch/config",
-  "prettier": "@ansearch/prettier-config",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "yarn@4.5.0",
   "description": "The various configs used to code in Typescript at A* Logic",
   "homepage": "https://github.com/A-star-logic/config-typescript",
@@ -13,6 +12,7 @@
   "devDependencies": {
     "@types/eslint-plugin-security": "^3",
     "@types/node": "^22.7.4",
+    "prettier": "^3.3.3",
     "tsup": "^8.3.0",
     "typescript": "^5.6.2"
   },
@@ -24,9 +24,6 @@
     "./linters/*": {
       "types": "./linters/*",
       "default": "./linters/*"
-    },
-    "./prettier-config": {
-      "default": "./linters/.prettierrc"
     }
   },
   "bin": {

@@ -4,14 +4,6 @@ This repo holds all the various configurations we need in our projects, to be ea
 
 Additionally, it export a single executable that will check the version of a package.
 
-## What and where
-
-Each subfolder exports config files for ESLint, Prettier, TSConfig and the bundlers/transpilers we use.
-
-- __common__: For shared configuration. This is not exported.
-- __backend & frontend__: For... backend code and web apps. The App folder is configured to transpile to ESM and `dist/` folders. The package folder is configured to transpile to ESM and `lib/` folders.
-- __library__: For any SDK or external module: the code will be transpiled to ES and CJS to `lib/` folders.
-
 ## How to use
 
 ### Verifier script
@@ -32,7 +24,53 @@ Example (please replace `@your/package` and `./your/package.json`);
 
 ### ESLint
 
+You will need to install the following packages:
+
+- ESLint
+- eslint-config-prettier
+- eslint-import-resolver-typescript
+- @typescript-eslint/parser
+
+You will then need to create the file eslint.config.js on the root with the following lines:
+
+```javascript
+// @ts-check
+import astarEslint from '@ansearch/linters/eslint.config.js';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config(...astarEslint);
+```
+
+Some rules can be particularly disruptive, here is the list of extensions used, and how we selected the rules:
+
+- fp: encourage the use of functional programming, while leaving some room for non-fp code when needed.
+- eslint-comments: todo and similar comment will create warnings, to help track them when running the linter
+- import-x: to verify typescript imports and exports. It will enforce named exports to ease tree shaking.
+- jsdoc: to force you documenting your code!
+- perfectionist: to keep a visual hierarchy
+- prettier: idem
+- regexp: try avoiding problematic regex
+- security: basic security linting
+- sonarjs: idem
+- unicorn: enforce consistent code
+- vue: for vue projects
+
 ### Prettier
+
+create a .prettierrc.js file and add:
+
+```js
+import astarConfig from '@ansearch/linters/prettier.js'
+
+/**
+ * @type {import("prettier").Config}
+ */
+const config = {
+    ...sharedConfig,
+  };
+  
+  export default config;
+```
 
 ### TSConfig
 
