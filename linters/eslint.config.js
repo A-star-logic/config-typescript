@@ -1,7 +1,7 @@
 /* cSpell: disable */
 // @ts-check
 import eslint from '@eslint/js';
-import eslintCommentsPlugin from 'eslint-plugin-eslint-comments';
+import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
 import jsdocPlugin from 'eslint-plugin-jsdoc';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import regexpPlugin from 'eslint-plugin-regexp';
@@ -23,7 +23,6 @@ export default tseslint.config(
   {
     plugins: {
       '@typescript-eslint': tseslint.plugin,
-      'eslint-comments': eslintCommentsPlugin,
       jsdoc: jsdocPlugin,
       regexp: regexpPlugin,
       // @ts-ignore
@@ -65,6 +64,8 @@ export default tseslint.config(
   ...fixupConfigRules(fpPlugin.configs.recommended),
   perfectionistPlugin.configs['recommended-natural'], //todo enable later
   sonarjsPlugin.configs.recommended,
+  // @ts-ignore -- Typings are not in the library yet
+  comments.recommended,
 
   // base config
   {
@@ -83,6 +84,11 @@ export default tseslint.config(
     linterOptions: { reportUnusedDisableDirectives: 2 },
 
     rules: {
+      //
+      // eslint-comments
+      //
+      '@eslint-community/eslint-comments/require-description': 2,
+
       //
       // eslint-plugin-perfectionist
       //
