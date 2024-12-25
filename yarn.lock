@@ -41,7 +41,10 @@ __metadata:
     typescript-eslint: "npm:^8.18.0"
     vue-eslint-parser: "npm:^9.4.3"
   peerDependencies:
+    "@typescript-eslint/parser": "*"
     eslint: "*"
+    eslint-config-prettier: "*"
+    prettier: "*"
   bin:
     npmjs-version-verify: ./bin/version-check.js
   languageName: unknown
