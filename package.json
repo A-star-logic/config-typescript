@@ -1,6 +1,6 @@
 {
   "name": "@ansearch/config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "packageManager": "yarn@4.5.0",
   "description": "The various configs used to code in Typescript at A* Logic",
   "homepage": "https://github.com/A-star-logic/config-typescript",
@@ -38,7 +38,9 @@
     "@typescript-eslint/parser": "*",
     "eslint": "*",
     "eslint-config-prettier": "*",
-    "prettier": "*"
+    "eslint-import-resolver-typescript": "*",
+    "prettier": "*",
+    "typescript": "*"
   },
   "dependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
