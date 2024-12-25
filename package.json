@@ -35,8 +35,8 @@
   },
   "type": "module",
   "peerDependencies": {
-    "eslint": "*",
     "@typescript-eslint/parser": "*",
+    "eslint": "*",
     "eslint-config-prettier": "*",
     "prettier": "*"
   },
