@@ -38,7 +38,9 @@
     "@typescript-eslint/parser": "*",
     "eslint": "*",
     "eslint-config-prettier": "*",
-    "prettier": "*"
+    "eslint-import-resolver-typescript": "*",
+    "prettier": "*",
+    "typescript": "*"
   },
   "dependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",

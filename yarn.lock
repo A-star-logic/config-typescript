@@ -44,7 +44,9 @@ __metadata:
     "@typescript-eslint/parser": "*"
     eslint: "*"
     eslint-config-prettier: "*"
+    eslint-import-resolver-typescript: "*"
     prettier: "*"
+    typescript: "*"
   bin:
     npmjs-version-verify: ./bin/version-check.js
   languageName: unknown
