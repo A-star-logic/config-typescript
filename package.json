@@ -35,7 +35,10 @@
   },
   "type": "module",
   "peerDependencies": {
-    "eslint": "*"
+    "eslint": "*",
+    "@typescript-eslint/parser": "*",
+    "eslint-config-prettier": "*",
+    "prettier": "*"
   },
   "dependencies": {
     "@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
