@@ -14,6 +14,7 @@ import tsParser from '@typescript-eslint/parser';
 import securityPlugin from 'eslint-plugin-security';
 import vuePlugin from 'eslint-plugin-vue';
 import vueParser from 'vue-eslint-parser';
+import drizzle from 'eslint-plugin-drizzle';
 
 // legacy linters
 import { fixupPluginRules, fixupConfigRules } from '@eslint/compat';
@@ -28,6 +29,7 @@ export default tseslint.config(
       // @ts-ignore
       fp: fixupPluginRules(fpPlugin),
       vue: vuePlugin,
+      drizzle,
     },
   },
   {
@@ -67,6 +69,8 @@ export default tseslint.config(
   // @ts-ignore -- Typings are not in the library yet
   comments.recommended,
 
+  { ignores: ['.prettierrc*'] },
+
   // base config
   {
     files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx,vue}'],
@@ -84,6 +88,8 @@ export default tseslint.config(
     linterOptions: { reportUnusedDisableDirectives: 2 },
 
     rules: {
+      ...drizzle.configs.recommended.rules,
+
       //
       // eslint-comments
       //
@@ -392,6 +398,17 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-argument': 0,
       '@typescript-eslint/no-unsafe-call': 0,
       '@typescript-eslint/unbound-method': 0,
+    },
+  },
+
+  ///////////
+  // Tests //
+  ///////////
+  {
+    files: ['**/tests/**'],
+    rules: {
+      'security/detect-non-literal-fs-filename': 0,
+      'eslint/security/detect-non-literal-fs-filename': 0,
     },
   },
 );
