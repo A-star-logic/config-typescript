@@ -10,6 +10,7 @@
   "license": "MIT",
   "author": "A* Logic (https://astarlogic.com)",
   "devDependencies": {
+    "@swc/core": "^1.12.5",
     "@types/eslint-plugin-security": "^3.0.0",
     "@types/node": "^24.0.3",
     "prettier": "^3.5.3",
