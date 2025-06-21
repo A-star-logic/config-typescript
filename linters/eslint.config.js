@@ -99,8 +99,6 @@ export default tseslint.config(
       // eslint-plugin-perfectionist
       //
       'perfectionist/sort-imports': [2, { newlinesBetween: 'ignore' }],
-      'sort-imports': 0, // required by perfectionist/sort-imports
-      'import-x/order': 0, // required by perfectionist/sort-imports
 
       //
       // eslint
@@ -366,7 +364,6 @@ export default tseslint.config(
       'vue/v-for-delimiter-style': [2, 'of'],
       // consistent with JS variable notation
       'vue/attribute-hyphenation': [2, 'never'],
-      'vue/attributes-order': 0, // done by perfectionist
       'vue/multi-word-component-names': 0, // not compatible with how the Nuxt router works
       // needed to not cause too many issues with nuxt
       'vue/no-undef-components': [
