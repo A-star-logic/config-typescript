@@ -88,7 +88,12 @@ export default tseslint.config(
     linterOptions: { reportUnusedDisableDirectives: 2 },
 
     rules: {
+      //
+      // eslint-plugin-drizzle
+      //
       ...drizzle.configs.recommended.rules,
+      "drizzle/enforce-delete-with-where": [2, { "drizzleObjectName": ["pgDatabase"] }],
+      "drizzle/enforce-update-with-where": [2, { "drizzleObjectName": ["pgDatabase"] }],
 
       //
       // eslint-comments
@@ -103,7 +108,6 @@ export default tseslint.config(
       //
       // eslint
       //
-      //'max-params': [1, 1], /unfortunately not granular enough, and picks up lambdas
       camelcase: [
         2,
         {
@@ -182,6 +186,8 @@ export default tseslint.config(
       ],
       '@typescript-eslint/consistent-type-imports': 2,
       '@typescript-eslint/no-import-type-side-effects': 2,
+      '@typescript-eslint/return-await': [2, 'always'],
+      '@typescript-eslint/max-params': [1, { max: 1 }],
 
       //
       // eslint-plugin-unicorn
@@ -225,6 +231,8 @@ export default tseslint.config(
       'fp/no-let': 0, // ESlint take care of flagging unused let
       'fp/no-mutating-methods': 0,
       'fp/no-mutation': 0,
+      'fp/no-class': 0,
+      'fp/no-this': 0,
 
       //
       // eslint-plugin-security
@@ -235,11 +243,15 @@ export default tseslint.config(
       // eslint-plugin-sonarjs
       //
       'sonarjs/new-cap': 0, // can't edit this, and there are false positives; do this in code reviews
-      'sonarjs/todo-tag': 1,
-      'sonarjs/cognitive-complexity': 1, // interesting rule, but it should not be disruptive
-      'sonarjs/no-small-switch': 1, // remove (use the recommended) when the codebase is more fledged out
       'sonarjs/no-vue-bypass-sanitization': 1, // remove (use the recommended) when the codebase is more fledged out
-      'sonarjs/prefer-single-boolean-return': 1, // remove (use the recommended) when the codebase is more fledged out
+      'sonarjs/assertions-in-tests': 0, // broken / very slow
+      'sonarjs/no-commented-code': 0, // broken / very slow
+      'sonarjs/cognitive-complexity': 0, // DIY
+      'sonarjs/no-small-switch': 0, // DIY
+      'sonarjs/todo-tag': 0, // duplicate of unicorn
+      'sonarjs/prefer-single-boolean-return': 0, // pure BS; documenting code is better
+
+      
     },
   },
   ////////////////
