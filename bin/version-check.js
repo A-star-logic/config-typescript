@@ -1,6 +1,6 @@
 import fs from "node:fs";
 
-if (!process.argv[2] && !process.argv[3]) {
+if (!process.argv[2] || !process.argv[3]) {
   console.log("Missing input");
   process.exit(1);
 }
