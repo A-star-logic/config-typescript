@@ -1,37 +1,6 @@
 /* cSpell: disable */
 // @ts-check
-import eslint from '@eslint/js';
-import comments from '@eslint-community/eslint-plugin-eslint-comments/configs';
-import jsdocPlugin from 'eslint-plugin-jsdoc';
-import perfectionistPlugin from 'eslint-plugin-perfectionist';
-import regexpPlugin from 'eslint-plugin-regexp';
-import sonarjsPlugin from 'eslint-plugin-sonarjs';
-import unicornPlugin from 'eslint-plugin-unicorn';
-import tseslint from 'typescript-eslint';
-import prettierPlugin from 'eslint-plugin-prettier/recommended';
-import eslintPluginImportX from 'eslint-plugin-import-x';
-import tsParser from '@typescript-eslint/parser';
-import securityPlugin from 'eslint-plugin-security';
-import vuePlugin from 'eslint-plugin-vue';
-import vueParser from 'vue-eslint-parser';
-import drizzle from 'eslint-plugin-drizzle';
-
-// legacy linters
-import { fixupPluginRules, fixupConfigRules } from '@eslint/compat';
-import fpPlugin from 'eslint-plugin-fp';
-
-export default tseslint.config(
-  {
-    plugins: {
-      '@typescript-eslint': tseslint.plugin,
-      jsdoc: jsdocPlugin,
-      regexp: regexpPlugin,
-      // @ts-ignore
-      fp: fixupPluginRules(fpPlugin),
-      vue: vuePlugin,
-      drizzle,
-    },
-  },
+export const config = [
   {
     ignores: [
       '**/jest.config.js',
@@ -52,48 +21,25 @@ export default tseslint.config(
     ],
   },
 
-  // extends ...
-  eslint.configs.recommended,
-  ...tseslint.configs.strictTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
-  jsdocPlugin.configs['flat/recommended-typescript-error'],
-  unicornPlugin.configs['flat/all'],
-  prettierPlugin,
-  eslintPluginImportX.flatConfigs.recommended,
-  eslintPluginImportX.flatConfigs.typescript,
-  securityPlugin.configs.recommended,
-  // @ts-ignore
-  ...fixupConfigRules(fpPlugin.configs.recommended),
-  perfectionistPlugin.configs['recommended-natural'], //todo enable later
-  sonarjsPlugin.configs.recommended,
-  // @ts-ignore -- Typings are not in the library yet
-  comments.recommended,
-
   { ignores: ['.prettierrc*'] },
 
   // base config
   {
     files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx,vue}'],
-    languageOptions: {
-      parser: vueParser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        extraFileExtensions: ['.vue'],
-        parser: tsParser,
-        sourceType: 'module',
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
-      },
-    },
     linterOptions: { reportUnusedDisableDirectives: 2 },
 
     rules: {
       //
       // eslint-plugin-drizzle
       //
-      ...drizzle.configs.recommended.rules,
-      "drizzle/enforce-delete-with-where": [2, { "drizzleObjectName": ["pgDatabase"] }],
-      "drizzle/enforce-update-with-where": [2, { "drizzleObjectName": ["pgDatabase"] }],
+      'drizzle/enforce-delete-with-where': [
+        2,
+        { drizzleObjectName: ['pgDatabase'] },
+      ],
+      'drizzle/enforce-update-with-where': [
+        2,
+        { drizzleObjectName: ['pgDatabase'] },
+      ],
 
       //
       // eslint-comments
@@ -156,6 +102,21 @@ export default tseslint.config(
       ],
       'object-curly-newline': 0, // disable this (cause issues, and prettier make sure this is consistent anyway)
       //'no-param-reassign': [2, { props: false }], // Make it compatible with vue
+      'no-restricted-globals': [
+        'error',
+        'closed',
+        'defaultStatus',
+        'event',
+        'frameElement',
+        'frames',
+        'length',
+        'name',
+        'opener',
+        'parent',
+        'self',
+        'status',
+        'top',
+      ],
 
       //
       // typescript-eslint
@@ -192,7 +153,7 @@ export default tseslint.config(
       //
       // eslint-plugin-unicorn
       //
-      'unicorn/no-null': 2,
+      'unicorn/no-null': 0, // creates tech debt for Drizzle
       'unicorn/no-useless-undefined': 0, // this is in direct clash with consistent-return
       'unicorn/no-for-loop': 1, // to avoid today, and enforce whenever possible
       'unicorn/no-empty-file': 2,
@@ -211,15 +172,17 @@ export default tseslint.config(
           case: 'kebabCase',
           ignore: [
             'App.vue', // don't wan't to deal with that
-            'Prose.*\\.vue$', // ignore all the Nuxt-content overrides
           ],
         },
       ],
+      'unicorn/prefer-global-this': 'error',
+      'unicorn/prefer-ternary': 0, // Too often this rule makes the code more complex
 
       //
       // eslint-plugin-import-x
       //
       'import-x/no-default-export': 2,
+      'import-x/namespace': 0, // not needed in a typescript only project with strict; also computationally expensive
 
       //
       // eslint-plugin-fp
@@ -250,8 +213,6 @@ export default tseslint.config(
       'sonarjs/no-small-switch': 0, // DIY
       'sonarjs/todo-tag': 0, // duplicate of unicorn
       'sonarjs/prefer-single-boolean-return': 0, // pure BS; documenting code is better
-
-      
     },
   },
   ////////////////
@@ -269,6 +230,7 @@ export default tseslint.config(
       // eslint-plugin-fp
       //
       'fp/no-this': 0,
+      'fp/no-rest-parameters': 'off', // too many false positives
 
       //
       // vue
@@ -399,7 +361,6 @@ export default tseslint.config(
       'no-console': 0,
       'no-restricted-syntax': 0,
       'unicorn/no-for-loop': 0,
-      'unicorn/no-null': 0,
       '@typescript-eslint/restrict-template-expressions': 0,
       '@typescript-eslint/no-unsafe-assignment': 0,
       '@typescript-eslint/no-unsafe-member-access': 0,
@@ -420,4 +381,4 @@ export default tseslint.config(
       'eslint/security/detect-non-literal-fs-filename': 0,
     },
   },
-);
+];
