@@ -1,7 +1,7 @@
 {
   "name": "@ansearch/config",
   "version": "2.0.0",
-  "packageManager": "yarn@4.9.2",
+  "packageManager": "yarn@4.13.0",
   "description": "The various configs used to code in Typescript at A* Logic",
   "homepage": "https://github.com/A-star-logic/config-typescript",
   "bugs": {
@@ -36,30 +36,27 @@
   },
   "type": "module",
   "peerDependencies": {
+    "@eslint-community/eslint-plugin-eslint-comments": "*",
+    "@eslint/compat": "*",
+    "@eslint/js": "*",
     "@typescript-eslint/parser": "*",
     "eslint": "*",
     "eslint-config-prettier": "*",
     "eslint-import-resolver-typescript": "*",
+    "eslint-plugin-drizzle": "*",
+    "eslint-plugin-fp": "*",
+    "eslint-plugin-import-x": "*",
+    "eslint-plugin-jsdoc": "*",
+    "eslint-plugin-perfectionist": "*",
+    "eslint-plugin-prettier": "*",
+    "eslint-plugin-regexp": "*",
+    "eslint-plugin-security": "*",
+    "eslint-plugin-sonarjs": "*",
+    "eslint-plugin-unicorn": "*",
+    "eslint-plugin-vue": "*",
     "prettier": "*",
-    "typescript": "*"
-  },
-  "dependencies": {
-    "@eslint-community/eslint-plugin-eslint-comments": "^4.5.0",
-    "@eslint/compat": "^1.4.1",
-    "@eslint/js": "^9.39.1",
-    "@typescript-eslint/parser": "^8.46.3",
-    "eslint-plugin-drizzle": "^0.2.3",
-    "eslint-plugin-fp": "^2.3.0",
-    "eslint-plugin-import-x": "^4.16.1",
-    "eslint-plugin-jsdoc": "^61.1.12",
-    "eslint-plugin-perfectionist": "^4.15.1",
-    "eslint-plugin-prettier": "^5.5.4",
-    "eslint-plugin-regexp": "^2.10.0",
-    "eslint-plugin-security": "^3.0.1",
-    "eslint-plugin-sonarjs": "^3.0.5",
-    "eslint-plugin-unicorn": "^62.0.0",
-    "eslint-plugin-vue": "^10.5.1",
-    "typescript-eslint": "^8.46.3",
-    "vue-eslint-parser": "^10.2.0"
+    "typescript": "*",
+    "typescript-eslint": "*",
+    "vue-eslint-parser": "*"
   }
 }
