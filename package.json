@@ -1,6 +1,10 @@
 {
   "name": "@ansearch/config",
   "version": "3.0.0",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "packageManager": "yarn@4.13.0",
   "description": "The various configs used to code in Typescript at A* Logic",
   "homepage": "https://github.com/A-star-logic/config-typescript",
