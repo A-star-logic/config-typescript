@@ -8,6 +8,10 @@
   "packageManager": "yarn@4.13.0",
   "description": "The various configs used to code in Typescript at A* Logic",
   "homepage": "https://github.com/A-star-logic/config-typescript",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/A-star-logic/config-typescript.git"
+  },
   "bugs": {
     "url": "https://github.com/A-star-logic/config-typescript/issues"
   },
