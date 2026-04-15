@@ -1,6 +1,7 @@
 run-name: Publish to NpmJS
 
 permissions:
+  id-token: write  
   contents: read
 
 on:
