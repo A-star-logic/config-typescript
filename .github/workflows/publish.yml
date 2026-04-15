@@ -19,17 +19,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
+
       - name: Prepare
         uses: ./.github/actions/prepare
-      
+
       - name: Version check
         run: yarn verify
-      
+
       - name: Build
         run: yarn build
-      
+
       - name: Publish
-        run: yarn npm publish
-        env:
-          YARN_NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public
