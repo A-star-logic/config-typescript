@@ -1,7 +1,7 @@
 run-name: Publish to NpmJS
 
 permissions:
-  id-token: write  
+  id-token: write
   contents: read
 
 on:
@@ -15,8 +15,6 @@ jobs:
   build:
     name: Build & Publish
     runs-on: ubuntu-latest
-    container: node:20-slim
-    environment: production
     steps:
       - name: Checkout
         uses: actions/checkout@v4
