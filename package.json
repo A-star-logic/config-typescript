@@ -61,10 +61,8 @@
     "eslint-plugin-security": "*",
     "eslint-plugin-sonarjs": "*",
     "eslint-plugin-unicorn": "*",
-    "eslint-plugin-vue": "*",
     "prettier": "*",
     "typescript": "*",
-    "typescript-eslint": "*",
-    "vue-eslint-parser": "*"
+    "typescript-eslint": "*"
   }
 }
