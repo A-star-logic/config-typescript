@@ -33,11 +33,9 @@ __metadata:
     eslint-plugin-security: "*"
     eslint-plugin-sonarjs: "*"
     eslint-plugin-unicorn: "*"
-    eslint-plugin-vue: "*"
     prettier: "*"
     typescript: "*"
     typescript-eslint: "*"
-    vue-eslint-parser: "*"
   bin:
     npmjs-version-verify: ./bin/version-check.js
   languageName: unknown
