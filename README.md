@@ -27,7 +27,7 @@ Example (please replace `@your/package` and `./your/package.json`);
 You will need to install the following packages:
 
 ```bash
-yarn add -D @eslint-community/eslint-plugin-eslint-comments @eslint/compat @eslint/js @typescript-eslint/parser eslint eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-drizzle eslint-plugin-fp eslint-plugin-import-x eslint-plugin-jsdoc eslint-plugin-perfectionist eslint-plugin-prettier eslint-plugin-regexp eslint-plugin-security eslint-plugin-sonarjs eslint-plugin-unicorn eslint-plugin-vue prettier typescript typescript-eslint vue-eslint-parser
+yarn add -D @eslint-community/eslint-plugin-eslint-comments @eslint/compat @eslint/js @typescript-eslint/parser eslint eslint-config-prettier eslint-import-resolver-typescript eslint-plugin-drizzle eslint-plugin-fp eslint-plugin-import-x eslint-plugin-jsdoc eslint-plugin-perfectionist eslint-plugin-prettier eslint-plugin-regexp eslint-plugin-security eslint-plugin-sonarjs eslint-plugin-unicorn prettier typescript typescript-eslint
 ```
 
 ### ESLint
@@ -49,8 +49,6 @@ import prettierPlugin from 'eslint-plugin-prettier/recommended';
 import eslintPluginImportX from 'eslint-plugin-import-x';
 import tsParser from '@typescript-eslint/parser';
 import securityPlugin from 'eslint-plugin-security';
-import vuePlugin from 'eslint-plugin-vue';
-import vueParser from 'vue-eslint-parser';
 import drizzle from 'eslint-plugin-drizzle';
 // legacy linters
 import { fixupPluginRules, fixupConfigRules } from '@eslint/compat';
@@ -69,7 +67,6 @@ export default tseslint.config(
       regexp: regexpPlugin,
       // @ts-ignore
       fp: fixupPluginRules(fpPlugin),
-      vue: vuePlugin,
       drizzle,
     },
   },
@@ -122,7 +119,6 @@ Some rules can be particularly disruptive, here is the list of extensions used, 
 - security: basic security linting
 - sonarjs: idem
 - unicorn: enforce consistent code
-- vue: for vue projects
 
 ### Prettier
 

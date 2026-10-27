@@ -18,6 +18,12 @@ export const config = [
       '**/*.config.js',
       '**/*.config.ts',
       '**/vitest.shared.ts',
+      '**/.expo/**',
+      '**/expo-env.d.ts',
+      'worker-configuration.d.ts',
+      '**/.wrangler/**',
+      '**/env.d.ts',
+      '**/*.cjs',
     ],
   },
 
@@ -25,7 +31,7 @@ export const config = [
 
   // base config
   {
-    files: ['**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx,vue}'],
+    files: ['**/*.{ts,tsx,mtsx}'],
     linterOptions: { reportUnusedDisableDirectives: 2 },
 
     rules: {
@@ -101,7 +107,7 @@ export const config = [
         { exceptAfterSingleLine: true },
       ],
       'object-curly-newline': 0, // disable this (cause issues, and prettier make sure this is consistent anyway)
-      //'no-param-reassign': [2, { props: false }], // Make it compatible with vue
+      'no-param-reassign': [2, { props: false }],
       'no-restricted-globals': [
         'error',
         'closed',
@@ -159,24 +165,54 @@ export const config = [
       'unicorn/no-empty-file': 2,
       'unicorn/expiring-todo-comment': 0, // causes issues
       'no-warning-comments': [1, { terms: ['todo', 'fix', 'fixme'] }],
-      'unicorn/prevent-abbreviations': [
-        // allow to have e2e in filenames, and allow vuejs common names (props, attrs, etc)
-        2,
-        {
-          ignore: ['.*-e2e.*', 'props', 'params', 'vite-env*'],
-        },
-      ],
       'unicorn/filename-case': [
         2,
         {
           case: 'kebabCase',
-          ignore: [
-            'App.vue', // don't wan't to deal with that
-          ],
+          ignore: ['App.*'],
         },
       ],
-      'unicorn/prefer-global-this': 'error',
+      'unicorn/prefer-global-this': 2,
       'unicorn/prefer-ternary': 0, // Too often this rule makes the code more complex
+      'unicorn/no-asterisk-prefix-in-documentation-comments': 0, // breaks a very old JS convention
+      'unicorn/consistent-boolean-name': 0, // borked
+      'unicorn/comment-content': 0, // too noisy, little value
+      'unicorn/max-nested-calls': 0, // annoying, little value
+      'unicorn/prefer-temporal': 1, // Date has legitimate use cases
+      'unicorn/no-manually-wrapped-comments': 0, // annoying, better check this in reviews anyway
+      'unicorn/no-top-level-assignment-in-function': 0, // annoying, little value, better check this in reviews
+      'unicorn/try-complexity': 0, // annoying, little value, better check this in reviews
+      'unicorn/consistent-class-member-order': 0, // direct clash with the sort plugin
+      'unicorn/no-top-level-side-effects': 0, // annoying, zero value
+      'unicorn/prefer-split-limit': 0, // BS not even useful in our runtime
+      'unicorn/prevent-abbreviations': 0, // clash with some conventions
+      'unicorn/name-replacements': [
+        2,
+        {
+          replacements: {
+            util: false,
+            utils: false,
+            param: false,
+            params: false,
+            prev: false,
+            prop: false,
+            props: false,
+            ref: false,
+            refs: false,
+          },
+        },
+      ],
+      'unicorn/consistent-arrow-return-style': 0, // clash with arrow-body-style: always
+      'unicorn/single-line-block-comment-style': 0, // annoying, little value
+      'unicorn/no-barrel-files': 0, // Too many clashes, better check this in reviews anyway
+      'unicorn/prefer-boolean-return': 0, // broken
+      'unicorn/prefer-error-is-error': 0, // break typings
+      'unicorn/no-unreadable-new-expression': 0, // annoying, little value
+      'unicorn/prefer-iterator-to-array': 0, // not compatible with hermes engine
+      'unicorn/prefer-iterator-concat': 0, // not compatible with hermes engine
+      'unicorn/no-keyword-prefix': ['error', { disallowedPrefixes: ['new'] }], // clash with react className
+      'unicorn/no-break-in-nested-loop': 0, // learn to code
+      'unicorn/prefer-logical-operator-over-ternary': 0, // this rule breaks on false ?? true
 
       //
       // eslint-plugin-import-x
@@ -196,6 +232,7 @@ export const config = [
       'fp/no-mutation': 0,
       'fp/no-class': 0,
       'fp/no-this': 0,
+      'fp/no-rest-parameters': 0, // too many false positives
 
       //
       // eslint-plugin-security
@@ -206,152 +243,39 @@ export const config = [
       // eslint-plugin-sonarjs
       //
       'sonarjs/new-cap': 0, // can't edit this, and there are false positives; do this in code reviews
-      'sonarjs/no-vue-bypass-sanitization': 1, // remove (use the recommended) when the codebase is more fledged out
       'sonarjs/assertions-in-tests': 0, // broken / very slow
       'sonarjs/no-commented-code': 0, // broken / very slow
       'sonarjs/cognitive-complexity': 0, // DIY
       'sonarjs/no-small-switch': 0, // DIY
       'sonarjs/todo-tag': 0, // duplicate of unicorn
       'sonarjs/prefer-single-boolean-return': 0, // pure BS; documenting code is better
+      'sonarjs/function-return-type': 0, // noisy, and already covered by other rules
+      'sonarjs/use-type-alias': 0, // agaisnt our style
     },
   },
   ////////////////
   // Frontend  //
   ///////////////
   {
-    files: ['frontends/**/*.{js,mjs,cjs,jsx,mjsx,ts,tsx,mtsx,vue}'],
+    files: ['frontends/**/*.{ts,tsx,mtsx}'],
     rules: {
-      //
-      // eslint
-      //
-      'no-console': 1, // to change whenever possible
-
       //
       // eslint-plugin-fp
       //
       'fp/no-this': 0,
       'fp/no-rest-parameters': 'off', // too many false positives
-
-      //
-      // vue
-      //
-      'vue/block-lang': [
+    },
+  },
+  {
+    // specific rules for react native
+    files: ['frontends/**/*.{tsx,mtsx}'],
+    rules: {
+      '@typescript-eslint/no-misused-promises': [
         2,
-        {
-          script: {
-            lang: 'ts',
-          },
-        },
+        { checksVoidReturn: { attributes: false } },
       ],
-
-      // enforce having template -> script -> style
-      'vue/block-order': [
-        2,
-        {
-          order: [['script', 'template'], 'style'],
-        },
-      ],
-
-      // enforce new lines on single line tags and multiline tags
-      'vue/block-tag-newline': [
-        2,
-        {
-          singleline: 'always',
-          multiline: 'always',
-        },
-      ],
-
-      // enforce vue 3 setup scripts
-      'vue/component-api-style': [1, ['script-setup']],
-
-      // enforce kebab-case (consistent with our naming scheme)
-      'vue/component-name-in-template-casing': [
-        2,
-        'kebab-case',
-        {
-          ignores: ['RouterView', 'Icon', 'RouterLink'],
-        },
-      ],
-
-      // enforce event naming to be consistent with JS naming
-      'vue/custom-event-name-casing': [2],
-      // enforce TS in defines
-      'vue/define-emits-declaration': 2,
-      'vue/define-props-declaration': 2,
-      // enforce same order of defines
-      'vue/define-macros-order': [
-        2,
-        {
-          order: ['defineProps', 'defineEmits'],
-          defineExposeLast: true,
-        },
-      ],
-      // enforce scoped style
-      'vue/enforce-style-attribute': 2,
-      // enforce button types
-      'vue/html-button-has-type': 2,
-      // modern tick style
-      'vue/next-tick-style': 2,
-      // prevent reactivity loss
-      'vue/no-ref-object-reactivity-loss': 2,
-      // you might want to re-think your code
-      'vue/no-root-v-if': 2,
-      // prevent style in html unless this is a binding
-      'vue/no-static-inline-styles': [
-        2,
-        {
-          allowBinding: true,
-        },
-      ],
-      // secure html
-      'vue/no-template-target-blank': 2,
-      // prevent uncaught errors
-      'vue/no-this-in-before-route-enter': 2,
-      // no undefined/unused
-      'vue/no-undef-properties': 2,
-      'vue/no-unused-emit-declarations': 2,
-      'vue/no-unused-properties': 2,
-      'vue/no-unused-refs': 2,
-      'vue/no-use-v-else-with-v-for': 2,
-      'vue/no-useless-mustaches': 2,
-      'vue/no-useless-v-bind': 2,
-      'vue/no-v-text': 2,
-      'vue/padding-line-between-blocks': 2,
-      // use define instead of exports
-      'vue/prefer-define-options': 2,
-      'vue/prefer-prop-type-boolean-first': 2,
-      'vue/prefer-separate-static-class': 2,
-      'vue/prefer-true-attribute-shorthand': 2,
-      'vue/require-emit-validator': 2,
-      'vue/require-macro-variable-name': 2,
-      // enforce documentation
-      'vue/require-prop-comment': [
-        'error',
-        {
-          type: 'JSDoc',
-        },
-      ],
-      // better TS
-      'vue/require-typed-object-prop': 2,
-      'vue/require-typed-ref': 2,
-      // consistent looping with JS
-      'vue/v-for-delimiter-style': [2, 'of'],
-      // consistent with JS variable notation
-      'vue/attribute-hyphenation': [2, 'never'],
-      'vue/multi-word-component-names': 0, // not compatible with how the Nuxt router works
-      // needed to not cause too many issues with nuxt
-      'vue/no-undef-components': [
-        2,
-        {
-          ignorePatterns: [
-            'Nuxt.*',
-            'Icon',
-            'ContentDoc',
-            'ContentList',
-            'ContentRenderer',
-          ],
-        },
-      ],
+      'unicorn/no-array-sort': 0, // toSorted is not available in RN
+      'import-x/no-default-export': 0,
     },
   },
   {

@@ -1,6 +1,6 @@
 {
   "name": "@ansearch/config",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -61,10 +61,8 @@
     "eslint-plugin-security": "*",
     "eslint-plugin-sonarjs": "*",
     "eslint-plugin-unicorn": "*",
-    "eslint-plugin-vue": "*",
     "prettier": "*",
     "typescript": "*",
-    "typescript-eslint": "*",
-    "vue-eslint-parser": "*"
+    "typescript-eslint": "*"
   }
 }
